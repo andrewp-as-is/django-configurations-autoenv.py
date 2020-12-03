@@ -1,5 +1,4 @@
 import os
-
 from configurations import Configuration, values
 
 TRUE_VALUES = ['yes', 'y', 'true', '1']
@@ -25,8 +24,8 @@ class AutoenvMixin:
         for k in os.environ.keys():
             name = k.replace('DJANGO_', '')
             if k.find('DJANGO_') >= 0 and not hasattr(cls, name):
-                setattr(cls, name, getvalue(k))
+                setattr(settings, name, getvalue(k))
 
 
-class AutoenvConfiguration(Configuration):
+class AutoenvConfiguration(AutoenvMixin, Configuration):
     pass
